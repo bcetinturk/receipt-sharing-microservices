@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Service
 public class UserService {
     UserRepository userRepository;
@@ -15,7 +17,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Mono<User> getUser(String uuid) {
+    public Mono<User> getUser(UUID uuid) {
         return userRepository.findById(uuid);
     }
 

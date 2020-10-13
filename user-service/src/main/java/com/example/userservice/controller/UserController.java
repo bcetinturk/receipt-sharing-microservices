@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @RestController
 public class UserController {
     UserService userService;
@@ -16,7 +18,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public Mono<User> getUser(@PathVariable("id") String id) {
+    public Mono<User> getUser(@PathVariable("id") UUID id) {
         return userService.getUser(id);
     }
 

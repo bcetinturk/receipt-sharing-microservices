@@ -22,7 +22,7 @@ public class UserServiceApplication {
 
 	@Bean
 	ApplicationRunner init(UserRepository userRepository) {
-		User user1 = new User("ID.BARIS", "Barış Çetintürk", "baris@gmail.com", "123", "0534", 0);
+		User user1 = new User(UUID.randomUUID(), "Barış Çetintürk", "baris@gmail.com", "123", "0534", 0);
 
 		return args -> {
 			userRepository

@@ -7,13 +7,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.UUID;
+
 @Document
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
     @Id
-    private String id;
+    private UUID id;
     private String fullName;
     @Indexed(unique = true)
     private String email;
@@ -21,8 +23,4 @@ public class User {
     @Indexed(unique = true)
     private String phone;
     private Integer points;
-
-    public boolean isNew() {
-        return getId() == null;
-    }
 }
