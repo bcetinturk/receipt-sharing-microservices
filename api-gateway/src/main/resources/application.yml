@@ -20,14 +20,14 @@ resilience4j:
     configs:
       default:
         slidingWindowSize: 10
-        minimumNumberOfCalls: 5
+        minimumNumberOfCalls: 10
         permittedNumberOfCallsInHalfOpenState: 3
         automaticTransitionFromOpenToHalfOpenEnabled: true
-        waitDurationInOpenState: 2s
-        failureRateThreshold: 5
+        waitDurationInOpenState: 30000
+        failureRateThreshold: 50
         eventConsumerBufferSize: 10
-        slowCallDurationThreshold: 200ms
-        slowCallRateThreshold: 30
+        slowCallDurationThreshold: 200
+        slowCallRateThreshold: 80
         recordExceptions:
           - org.springframework.web.client.HttpServerErrorException
           - java.io.IOException
