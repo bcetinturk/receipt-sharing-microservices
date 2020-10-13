@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/users, /users/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: serviceA
+                fallbackUri: forward:/fallback
+
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 2s
+        failureRateThreshold: 5
+        eventConsumerBufferSize: 10
+        slowCallDurationThreshold: 200ms
+        slowCallRateThreshold: 30
+        recordExceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - java.io.IOException
+        ignoreExceptions:
+          - java.lang.IllegalStateException
+    instances:
+      serviceA:
+        baseConfig: default
