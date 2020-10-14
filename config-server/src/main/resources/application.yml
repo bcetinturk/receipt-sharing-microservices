@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      server:
+        vault:
+          kv-version: 2
+  profiles:
+    active: vault
+
+server:
+  port: 8888
