@@ -18,7 +18,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public Mono<User> getUser(@PathVariable("id") UUID id) {
+    public Mono<User> getUser(@PathVariable("id") UUID id /*, Authhentication auth */) {
         return userService.getUser(id);
     }
 

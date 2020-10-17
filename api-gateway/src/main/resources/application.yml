@@ -1,8 +1,21 @@
 spring:
   application:
     name: api-gateway
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8090/auth/realms/receipt-sharing
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: receipt-sharing-gateway
+            client-secret: f1272f8c-e377-4b73-acb2-36a3ea66d161
   cloud:
     gateway:
+      default-filters:
+        - TokenRelay
       routes:
         - id: user-service
           uri: lb://user-service
@@ -36,3 +49,11 @@ resilience4j:
     instances:
       serviceA:
         baseConfig: default
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud.gateway: DEBUG
+        http.server.reactive: DEBUG
+        web.reactive: DEBUG
