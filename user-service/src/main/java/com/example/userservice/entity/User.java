@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
@@ -16,11 +15,5 @@ import java.util.UUID;
 public class User {
     @Id
     private UUID id;
-    private String fullName;
-    @Indexed(unique = true)
-    private String email;
-    private String password;
-    @Indexed(unique = true)
-    private String phone;
     private Integer points;
 }
